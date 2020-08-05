@@ -105,14 +105,13 @@ const sortByNumber = function (arr) {
 
 
 sixesMaxDiceNum = 6
-twelvesMaxDiceNum = 12
+// twelvesMaxDiceNum = 12
 // twentiesMaxDiceNum = 20
 // const resultAfterRoll = function (maxDiceNum){
 //   resultAfterDiceRoll.push(getRandomNumber(maxDiceNum))
 
 
 // }
-
 /*******************
  * YOUR CODE BELOW *
  *******************/
@@ -124,38 +123,43 @@ twelvesMaxDiceNum = 12
  *******************/
 
 //  Calculate a random number from 1 to the maximum number for that die 
-// console.log(getRandomNumber(2))
+const sixesDiceRoll = function(){
+  //  Add the result of the roll into its respective array
+  let result = getRandomNumber(sixesMaxDiceNum) ;
 
-//  Change the image of the dice roll "button" to the results, 
-//  using the images in the d6 and numbers directories
-// if (getRandomNumber(6) === 1){
-//   sixesDice.src = './images/d6/1.png'
-// }
-
-
-
-switch (getRandomNumber(6)) {
-
-  case 1:
+  if (result === 1){
     sixesDice.src = './images/d6/1.png';
-
-  case 2:
+  }
+  if (result === 2){
     sixesDice.src = './images/d6/2.png';
-
-  case 3:
+  }
+  if (result === 3){
     sixesDice.src = './images/d6/3.png';
-
-  case 4:
+  }
+  if (result === 4){
     sixesDice.src = './images/d6/4.png';
-
-  case 5:
+  }
+  if (result === 5){
     sixesDice.src = './images/d6/5.png';
-
-  case 6:
+  }
+  if (result === 6){
     sixesDice.src = './images/d6/6.png';
+  }
+  
+    //  Add the result of the roll into its respective array
+    //  global Scope
+    resultAfterDiceRoll.push(result)
+  }
+  
 
-  // console.log(getRandomNumber(sixesMaxDiceNum))
-}
+
+  sixesDiceRoll()
+  // sixesDice.addEventListener('click', sixesDiceRoll)
+  console.log(resultAfterDiceRoll)
+
+
+
+
 
 
 
@@ -212,3 +216,6 @@ const reset = function () {
 /****************
  * MATH SECTION *
  ****************/
+
+ //  Change the image of the dice roll "button" to the results, 
+//  using the images in the d6 and numbers directories
