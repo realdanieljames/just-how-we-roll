@@ -8,13 +8,18 @@ const sixes = [];
 const doubleSixes = [];
 const twelves = [];
 const twenties = [];
-const resultAfterDiceRoll = []
+let resultAfterDiceRoll = []
+const resetButton = document.querySelector('button#reset-button') 
+// for image recognition in functions
+let numbersImgSource = './images/numbers/'
+let d6ImgSource = './images/d6/'
 
 /***************
  * DICE IMAGES *
  ***************/
 const sixesDice = document.querySelector('img#d6-roll.d6.roll')
 
+const doubleDiceImages =  document.querySelector('main');
 const doubleSixesDice1 = document.querySelector('img#double-d6-roll-1.d6.roll ')
 const doubleSixesDice2 = document.querySelector('img#double-d6-roll-2.d6.roll')
 
@@ -105,11 +110,11 @@ const sortByNumber = function (arr) {
 
 
 sixesMaxDiceNum = 6
-// twelvesMaxDiceNum = 12
-// twentiesMaxDiceNum = 20
-// const resultAfterRoll = function (maxDiceNum){
-//   resultAfterDiceRoll.push(getRandomNumber(maxDiceNum))
+twelvesMaxDiceNum = 12
+twentiesMaxDiceNum = 20
 
+//----------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------//
 
 // }
 /*******************
@@ -118,49 +123,59 @@ sixesMaxDiceNum = 6
 
 
 
-/*******************
- * EVENT LISTENERS *
- *******************/
 
-//  Calculate a random number from 1 to the maximum number for that die 
-const sixesDiceRoll = function(){
+
+const doubleSixesDice2Roll = function () {
+  let result = getRandomNumber(sixesMaxDiceNum);
+
+
+  let pngImage = d6ImgSource + `${result}.png`
+
+  doubleSixesDice2.src = pngImage
+
+
+  // doubleSixesDice1Roll()
   //  Add the result of the roll into its respective array
-  let result = getRandomNumber(sixesMaxDiceNum) ;
+  //  global Scope
+  resultAfterDiceRoll.push(result)
+}
+//----------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------//
 
-  if (result === 1){
-    sixesDice.src = './images/d6/1.png';
-  }
-  if (result === 2){
-    sixesDice.src = './images/d6/2.png';
-  }
-  if (result === 3){
-    sixesDice.src = './images/d6/3.png';
-  }
-  if (result === 4){
-    sixesDice.src = './images/d6/4.png';
-  }
-  if (result === 5){
-    sixesDice.src = './images/d6/5.png';
-  }
-  if (result === 6){
-    sixesDice.src = './images/d6/6.png';
-  }
-  
-    //  Add the result of the roll into its respective array
-    //  global Scope
-    resultAfterDiceRoll.push(result)
-  }
-  
+/******************************
+ * TWElVES DICE ROLL FUNCTION *
+ ******************************/
 
+const twelvesDiceRoll = function () {
+  let result = getRandomNumber(twelvesMaxDiceNum)
 
-  sixesDiceRoll()
-  // sixesDice.addEventListener('click', sixesDiceRoll)
-  console.log(resultAfterDiceRoll)
+  // let source = './images/numbers/'
+  // console.log(source)
+  // console.log(result)
+  // console.log(source + `${result}.png`)
+  let pngImage = numbersImgSource + `${result}.png`
 
+  //  try with image source
+  twelvesDice.src = pngImage
+}
 
+// twelvesDiceRoll()
+//----------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------//
 
+/*******************************
+ * TWENTIES DICE ROLL FUNCTION * 
+ *******************************/
 
+const twentiesDiceRoll = function () {
+  let result = getRandomNumber(twentiesMaxDiceNum)
 
+  let pngImg = numbersImgSource + `${result}.png`
+
+  twentiesDice.src = pngImg
+}
+
+// twentiesDiceRoll()
 
 
 
@@ -207,7 +222,12 @@ const reset = function () {
   twentiesMean.innerText = '\n'
   twentiesMedian.innerText = '\n'
   twentiesMode.innerText = '\n'
+
+  
 }
+
+//----------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------//
 
 // reset()
 
@@ -217,5 +237,149 @@ const reset = function () {
  * MATH SECTION *
  ****************/
 
- //  Change the image of the dice roll "button" to the results, 
-//  using the images in the d6 and numbers directories
+//  mean, median and mode. 
+//  recommended making helper functions for each of these.
+//  hat take in an array as input 
+//  and spit out one number as output
+
+/*****************
+ * MEAN FUNCTION *
+ *****************/
+const mean = function (array) {
+  let average = 0
+  let sum = 0
+  let arrLength = array.length
+  for (number of array) {
+    sum = sum + number
+    average = sum / arrLength
+  }
+  // console.log(average)
+  resultAfterDiceRoll.push(average)
+  return (average)
+}
+// mean([1, 2, 3, 4, 5, 6])
+// mean([9, 8, 7, 6, 5, 4])
+//----------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------//
+
+
+/*******************
+ * MEDIAN FUNCTION *
+ *******************/
+const median = function (array) {
+
+  //  sort the numbers.
+  array = sortByNumber(array)
+  // find middle character
+  //keep whole numbers
+  let middleCharacter = Math.floor(array.length / 2)
+  // console(middleCharacter)
+  resultAfterDiceRoll.push(middleCharacter)
+  return (middleCharacter)
+}
+// median([1, 2, 3, 4, 5, 6])
+// median([9, 8, 7, 6, 5, 4, 45, 67, 8, 6, 60])
+//----------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------//
+
+
+/*****************
+ * MODE FUNCTION *
+ *****************/
+//  store how many times ive seen each number in object
+// track which is the highest number as we go
+const mode = function () { }
+
+
+
+
+
+
+
+
+/****************************
+ * SIXES DICE ROLL FUNCTION *
+ ****************************/
+
+// DEFAULT PICTURE NOT SET
+// PHOTO ONLY CHANGES WITH CLICK
+
+//  Calculate a random number from 1 to the maximum number for that die 
+const sixesDiceRoll = function () {
+  //  Change the image of the dice roll "button" to the results, 
+  //  using the images in the d6 and numbers directories
+  let result = getRandomNumber(sixesMaxDiceNum);
+  
+  let pngImage = d6ImgSource + `${result}.png`
+  
+  sixesDice.src = pngImage
+
+  // calculate mean and median
+  sixesMean.innerText = mean(resultAfterDiceRoll)
+  sixesMedian.innerText = median(resultAfterDiceRoll)
+  //  Add the result of the roll into its respective array
+  //  global Scope
+  resultAfterDiceRoll.push(result)
+  // console.log(resultAfterDiceRoll)
+}
+
+
+// sixesDiceRoll()
+// sixesDice.addEventListener('click', sixesDiceRoll)
+// console.log(resultAfterDiceRoll)
+//----------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------//
+
+
+
+const doubleSixesDice1Roll = function () {
+  let result = getRandomNumber(sixesMaxDiceNum);
+
+  let pngImage = d6ImgSource + `${result}.png`
+
+  doubleSixesDice1.src = pngImage
+
+  //  Add the result of the roll into its respective array
+  //  global Scope
+  doubleSixesMean.innerText = mean(resultAfterDiceRoll)
+  doubleSixesMedian.innerText = median(resultAfterDiceRoll)
+  doubleSixesDice2Roll()
+  resultAfterDiceRoll.push(result)
+}
+// doubleSixesDice1Roll()
+//----------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------//
+
+
+
+/*******************
+ * EVENT LISTENERS *
+ *******************/
+
+resetButton.addEventListener('click', reset)
+
+sixesDice.addEventListener('click', sixesDiceRoll)
+
+
+
+doubleDiceImages.addEventListener('click', doubleSixesDice1Roll)
+doubleDiceImages.addEventListener('click', doubleSixesDice2Roll)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
